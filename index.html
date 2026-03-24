@@ -12,9 +12,16 @@
 		<style>
 
 /* ===== GLOBAL BACKGROUND: dark canyon ===== */
-/* style-2 containers (hero, contact) are transparent — they show body::before */
+/* Suppress body::before (position:fixed causes background-attachment:fixed to use  */
+/* a different reference frame than absolute::before — kills the alignment).        */
+/* Set dark image directly on body so both dark + light use the same ICB reference. */
 body::before {
+  content: none !important;
+}
+
+body {
   background-image: url(assets/hellgate_dark.png) !important;
+  background-attachment: fixed !important;
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
