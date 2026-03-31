@@ -37,13 +37,13 @@ body {
 /* Both body::before (dark) and this ::before (light) use background-attachment:fixed  */
 /* with identical cover/center — same scene, same viewport coords — so the light image */
 /* sits perfectly on top of the dark one as the panel scrolls up over the hero.        */
-#services, #process, #work {
+#services, #process, #work, #clients {
   background: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
-#services::before, #process::before, #work::before {
+#services::before, #process::before, #work::before, #clients::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -58,7 +58,8 @@ body {
 /* Wrapper must sit above the ::before */
 #services > .wrapper,
 #process > .wrapper,
-#work > .wrapper {
+#work > .wrapper,
+#clients > .wrapper {
   position: relative;
   z-index: 1;
 }
@@ -66,7 +67,8 @@ body {
 /* ===== PANEL INNER: zero ALL padding + reset gutters so columns = exactly 50vw ===== */
 #services > .wrapper > .inner,
 #process > .wrapper > .inner,
-#work > .wrapper > .inner {
+#work > .wrapper > .inner,
+#clients > .wrapper > .inner {
   padding: 0 !important;
   --gutters: 0px !important;
 }
@@ -74,7 +76,8 @@ body {
 /* ===== PANEL IMAGE PANES (div.full): opaque white ===== */
 #services > .wrapper > .inner > div.full,
 #process > .wrapper > .inner > div.full,
-#work > .wrapper > .inner > div.full {
+#work > .wrapper > .inner > div.full,
+#clients > .wrapper > .inner > div.full {
   background-color: #FFFFFF;
   align-self: stretch !important;
   min-height: var(--viewport-height);
@@ -104,10 +107,66 @@ body {
   background-repeat: no-repeat;
 }
 
+/* ===== CLIENTS PANEL COLUMN WIDTHS ===== */
+.container-component.instance-6 > .wrapper > .inner > :nth-child(1) {
+  width: calc(50% + (var(--gutters) / 2));
+}
+.container-component.instance-6 > .wrapper > .inner > :nth-child(2) {
+  width: calc(50% + (var(--gutters) / 2));
+}
+
+/* ===== CLIENTS PANEL IMAGE ===== */
+#clients > .wrapper > .inner > div.full {
+  background-image: url(assets/panel_clients.png);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* ===== CLIENT LIST ===== */
+#client-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin: 1.5rem 0;
+}
+#client-list a.client-item {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.2s;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875em;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.325rem;
+  line-height: 2.25;
+}
+#client-list a.client-item:hover {
+  color: #EEB63E;
+}
+#client-list a.client-item img {
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+#client-list a.client-item:hover img {
+  opacity: 1;
+}
+#client-list a.client-item span {
+  line-height: 1.5;
+}
+
 /* ===== PANEL TEXT PANES: dark overlay so text stays legible ===== */
 #services > .wrapper > .inner > div:not(.full),
 #process > .wrapper > .inner > div:not(.full),
-#work > .wrapper > .inner > div:not(.full) {
+#work > .wrapper > .inner > div:not(.full),
+#clients > .wrapper > .inner > div:not(.full) {
   border: 1px solid rgba(249, 231, 113, 0.18);
   align-self: stretch !important;
   padding: 6rem !important;
@@ -212,6 +271,7 @@ body {
 					<li><a href="#services">Services</a></li>
 					<li><a href="#process">Process</a></li>
 					<li><a href="#work">Work</a></li>
+					<li><a href="#clients">Clients</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
 				<a href="https://blair-gemmer.youcanbook.me/" id="hgc-nav-cta" target="_blank" rel="noopener">Book</a>
@@ -249,7 +309,7 @@ body {
 								<div>
 									<p id="text05" class="text-component instance-5 style-4">Services</p>
 									<h2 id="text06" class="text-component instance-6 style-3">What We Deliver</h2>
-									<p id="text08" class="text-component instance-8 style-1">AI implementation and automation. Production-grade software engineering and delivery. Security hardening, SRE, and system reliability &mdash; hands-on, startup-speed.</p>
+									<p id="text08" class="text-component instance-8 style-1">AI implementation and automation that ships. Production-grade engineering and delivery, without the enterprise overhead. Security hardening, SRE, and system reliability - hands-on, startup-speed.</p>
 									<ul id="buttons01" class="buttons-component instance-1 style-1">
 										<li>
 											<a href="#process" class="n01" role="button"><span class="label">See the Process</span></a>
@@ -267,7 +327,7 @@ body {
 								<div>
 									<p id="text36" class="text-component instance-36 style-4">Process</p>
 									<h2 id="text57" class="text-component instance-57 style-3">How We Work</h2>
-									<p id="text11" class="text-component instance-11 style-1">Diagnose your current state. Plan quick wins and a clear roadmap. Implement hands-on. Stabilize with docs, monitoring, and handoff.</p>
+									<p id="text11" class="text-component instance-11 style-1">Start with an honest look at where things stand, then move fast. Quick wins first, clear roadmap next, hands-on implementation from concept to launch. Post-launch stability, documentation, monitoring, and team education for a clean handoff.</p>
 									<ul id="buttons03" class="buttons-component instance-3 style-1">
 										<li>
 											<a href="#work" class="n01" role="button"><span class="label">See the Results</span></a>
@@ -288,13 +348,50 @@ body {
 								</div>
 								<div>
 									<p id="text02" class="text-component instance-2 style-4">Results</p>
-									<h2 id="text09" class="text-component instance-9 style-3">Proof of Work</h2>
-									<p id="text10" class="text-component instance-10 style-1">Shipped production systems on tight timelines. Reduced incident rates and hardened attack surfaces. Automated workflows that cut operational overhead and scale with the team.</p>
+									<h2 id="text09" class="text-component instance-9 style-3">Delivered</h2>
+									<p id="text10" class="text-component instance-10 style-1">Production systems and AI workflows, shipped and secured. Reduced incident rates and hardened attack surfaces. Automated workflows that scale.</p>
 									<ul id="buttons04" class="buttons-component instance-4 style-1">
 										<li>
 											<a href="#contact" class="n01" role="button"><span class="label">Start the Conversation</span></a>
 										</li>
 									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- CLIENTS PANEL -->
+					<div id="clients" data-scroll-id="clients" data-scroll-behavior="default" data-scroll-offset="0" data-scroll-speed="3" data-scroll-invisible="1" class="container-component instance-6 style-1 columns full screen">
+						<div class="wrapper">
+							<div class="inner" data-onvisible-trigger="1">
+								<div>
+									<p id="text62" class="text-component instance-62 style-4">Recent Work</p>
+									<h2 id="text63" class="text-component instance-63 style-3">Who We&#39;ve Built For</h2>
+									<div id="client-list">
+										<a href="https://tomis.tech" target="_blank" rel="noopener" class="client-item">
+											<img src="assets/logo_tomis.png" alt="TOMIS" />
+											<span>Full SaaS platform for tour operators, built from concept to production - workflow automation, analytics, and DevOps from day one</span>
+										</a>
+										<a href="https://submittable.com" target="_blank" rel="noopener" class="client-item">
+											<img src="assets/logo_submittable.png" alt="Submittable" />
+											<span>Standardized CI/CD for a grants management SaaS, cutting deployment overhead 30% and moving to a daily shipping cadence</span>
+										</a>
+										<a href="https://vynyl.com" target="_blank" rel="noopener" class="client-item">
+											<img src="assets/logo_vynyl.png" alt="VYNYL" />
+											<span>Production systems for virtual healthcare during the pandemic and an educational tool for early learning disability diagnosis</span>
+										</a>
+										<a href="https://intrustfunding.com" target="_blank" rel="noopener" class="client-item">
+											<img src="assets/logo_intrust_funding.png" alt="Intrust Funding" />
+											<span>Built Frostforce, a multi-tenant Snowflake-to-Salesforce pipeline for a real estate finance firm - serverless-ready on AWS</span>
+										</a>
+									</div>
+									<ul id="buttons07" class="buttons-component instance-7 style-1">
+										<li>
+											<a href="#contact" class="n01" role="button"><span class="label">Start the Conversation</span></a>
+										</li>
+									</ul>
+								</div>
+								<div class="full">
 								</div>
 							</div>
 						</div>
