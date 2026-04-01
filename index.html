@@ -162,6 +162,12 @@ body {
   line-height: 1.5;
 }
 
+/* ===== ZERO GAPS BETWEEN ALL PANELS AT ALL SIZES ===== */
+#container05, #services, #process, #work, #clients, #contact {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 /* ===== PANEL TEXT PANES: dark overlay so text stays legible ===== */
 #services > .wrapper > .inner > div:not(.full),
 #process > .wrapper > .inner > div:not(.full),
@@ -256,6 +262,13 @@ body {
   #hgc-nav-links { display: none; }
   #hgc-nav-cta { margin-left: auto; }
 
+  /* Hide panel ::before overlays on mobile - background-attachment: fixed
+     is broken on non-body elements in mobile browsers, causing seams.
+     Body ::before (dark hellgate) still shows through seamlessly. */
+  #services::before, #process::before, #work::before, #clients::before {
+    display: none;
+  }
+
   /* Unstick the 50% column widths so they go full-width when stacked */
   .container-component.instance-6 > .wrapper > .inner > :nth-child(1),
   .container-component.instance-6 > .wrapper > .inner > :nth-child(2) {
@@ -267,7 +280,7 @@ body {
   #process > .wrapper > .inner > div:not(.full),
   #work > .wrapper > .inner > div:not(.full),
   #clients > .wrapper > .inner > div:not(.full) {
-    padding: 3rem !important;
+    padding: 2.5rem !important;
   }
 
   /* Hide image panes on mobile - text-only panels */
