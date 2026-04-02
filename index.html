@@ -33,6 +33,22 @@ body {
   box-sizing: border-box;
 }
 
+/* Let hero/contact sections fill the viewport like the middle panels, while
+   keeping their text content on a centered readable column. */
+#container05 > .wrapper,
+#contact > .wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#container05 > .wrapper > .inner,
+#contact > .wrapper > .inner {
+  width: 100%;
+  max-width: 70rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
 /* ===== PANELS: aligned light-image filter over the fixed dark background ===== */
 /* Both body::before (dark) and this ::before (light) use background-attachment:fixed  */
 /* with identical cover/center — same scene, same viewport coords — so the light image */
@@ -168,6 +184,7 @@ body {
   margin-bottom: 0 !important;
 }
 
+
 /* ===== PANEL TEXT PANES: dark overlay so text stays legible ===== */
 #services > .wrapper > .inner > div:not(.full),
 #process > .wrapper > .inner > div:not(.full),
@@ -212,13 +229,18 @@ body {
   border-bottom: 1px solid rgba(238, 182, 62, 0.35);
 }
 #hgc-nav-inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
   height: 100%;
+}
+#hgc-nav-logo {
+  flex-shrink: 0;
 }
 #hgc-nav-logo img {
   height: 36px;
@@ -227,9 +249,12 @@ body {
 }
 #hgc-nav-links {
   display: flex;
+  justify-content: center;
+  flex: 1 1 auto;
   list-style: none;
   margin: 0; padding: 0;
   gap: 2rem;
+  min-width: 0;
 }
 #hgc-nav-links li { margin: 0; padding: 0; }
 #hgc-nav-links a {
@@ -243,6 +268,12 @@ body {
   transition: color 0.2s ease;
 }
 #hgc-nav-links a:hover { color: #EEB63E; text-decoration: none; }
+#hgc-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
 #hgc-nav-cta {
   display: inline-block;
   padding: 0.45rem 1.1rem;
@@ -258,24 +289,207 @@ body {
   transition: background-color 0.2s ease;
 }
 #hgc-nav-cta:hover { background-color: #F9E771; color: #0d0804; }
-@media (max-width: 736px) {
-  #hgc-nav-links { display: none; }
-  #hgc-nav-cta { margin-left: auto; }
+#hgc-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.28rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid rgba(238, 182, 62, 0.35);
+  background-color: rgba(20, 12, 10, 0.2);
+  color: #FFFFFF;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+#hgc-nav-toggle:hover {
+  background-color: rgba(238, 182, 62, 0.12);
+  border-color: rgba(249, 231, 113, 0.45);
+}
+#hgc-nav-toggle span {
+  display: block;
+  width: 1.1rem;
+  height: 2px;
+  background-color: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+#hgc-nav.is-open #hgc-nav-toggle span:nth-child(1) {
+  transform: translateY(0.405rem) rotate(45deg);
+}
+#hgc-nav.is-open #hgc-nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+#hgc-nav.is-open #hgc-nav-toggle span:nth-child(3) {
+  transform: translateY(-0.405rem) rotate(-45deg);
+}
 
-  /* Hide panel ::before overlays on mobile - background-attachment: fixed
-     is broken on non-body elements in mobile browsers, causing seams.
-     Body ::before (dark hellgate) still shows through seamlessly. */
+@media (max-width: 1100px) {
+  #hgc-nav-links { gap: 1.25rem; }
+  #hgc-nav-logo img { max-width: 150px; }
+}
+
+@media (max-width: 820px) {
+  #hgc-nav-inner {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  #hgc-nav-logo img {
+    max-width: 120px;
+    height: auto;
+  }
+
+  #hgc-nav-links {
+    gap: 0.85rem;
+  }
+
+  #hgc-nav-links a {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+  }
+
+  #hgc-nav-cta {
+    padding: 0.42rem 0.85rem;
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 700px) {
+  #hgc-nav-inner {
+    gap: 0.75rem;
+  }
+
+  #hgc-nav-links {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    left: 1rem;
+    right: 1rem;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.75rem;
+    background-color: rgba(20, 12, 10, 0.96);
+    border: 1px solid rgba(238, 182, 62, 0.28);
+    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.5rem);
+    transition: opacity 0.2s ease, transform 0.2s ease, max-height 0.2s ease;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  #hgc-nav.is-open #hgc-nav-links {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    max-height: 24rem;
+  }
+
+  #hgc-nav-links li + li {
+    border-top: 1px solid rgba(238, 182, 62, 0.15);
+  }
+
+  #hgc-nav-links a {
+    display: block;
+    padding: 0.9rem 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+
+  #hgc-nav-cta {
+    padding: 0.42rem 0.85rem;
+    font-size: 0.68rem;
+  }
+
+  #hgc-nav-toggle {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 900px) {
+  #container05 > .wrapper > .inner,
+  #contact > .wrapper > .inner {
+    padding: 2.5rem !important;
+  }
+
+  #buttons02,
+  #buttons05 {
+    width: 100%;
+    max-width: 20rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #buttons02 > li,
+  #buttons05 > li {
+    width: 100%;
+  }
+
+  #buttons02 > li > a,
+  #buttons05 > li > a {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 4rem;
+    line-height: 1.3;
+    padding: 1rem;
+    font-size: 0.85em;
+    letter-spacing: 0.12rem;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+  }
+
+  #buttons02 > li > a > .label,
+  #buttons05 > li > a > .label {
+    overflow: visible;
+    text-align: center;
+  }
+
+  /* Stack the feature panels earlier and let them size to content so the
+     tablet/mobile "in-between" layout doesn't leave a dead band between sections. */
+  #services, #process, #work, #clients {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  #services > .wrapper > .inner,
+  #process > .wrapper > .inner,
+  #work > .wrapper > .inner,
+  #clients > .wrapper > .inner {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+  }
+
+  #services > .wrapper > .inner > *,
+  #process > .wrapper > .inner > *,
+  #work > .wrapper > .inner > *,
+  #clients > .wrapper > .inner > * {
+    min-height: 0 !important;
+    width: 100% !important;
+  }
+
+  #process > .wrapper > .inner > :first-child {
+    --alignment: left;
+    --flex-alignment: flex-start;
+    --indent-left: 1;
+    --indent-right: 0;
+    --margin-left: 0;
+    --margin-right: auto;
+  }
+
+  /* Hide panel ::before overlays on mobile/tablet because fixed attachment
+     on non-body elements creates seams as the layout reflows. */
   #services::before, #process::before, #work::before, #clients::before {
     display: none;
   }
 
-  /* Unstick the 50% column widths so they go full-width when stacked */
-  .container-component.instance-6 > .wrapper > .inner > :nth-child(1),
-  .container-component.instance-6 > .wrapper > .inner > :nth-child(2) {
-    width: 100% !important;
-  }
-
-  /* Reduce text pane padding on mobile */
+  /* Reduce text pane padding on mobile/tablet */
   #services > .wrapper > .inner > div:not(.full),
   #process > .wrapper > .inner > div:not(.full),
   #work > .wrapper > .inner > div:not(.full),
@@ -283,7 +497,7 @@ body {
     padding: 2.5rem !important;
   }
 
-  /* Hide image panes on mobile - text-only panels */
+  /* Hide image panes in the stacked layout */
   #services > .wrapper > .inner > div.full,
   #process > .wrapper > .inner > div.full,
   #work > .wrapper > .inner > div.full,
@@ -291,7 +505,7 @@ body {
     display: none !important;
   }
 
-  /* Fix button text clipping on mobile */
+  /* Fix button text clipping on smaller widths */
   .buttons-component.style-1 > li > a {
     letter-spacing: 0.2rem;
     padding-left: calc(0.2rem + 1.5rem);
@@ -299,7 +513,7 @@ body {
     box-sizing: border-box;
   }
 
-  /* Stack client list items vertically on mobile */
+  /* Stack client list items vertically on mobile/tablet */
   #client-list a.client-item {
     flex-direction: column;
     align-items: flex-start;
@@ -308,6 +522,42 @@ body {
 
   #client-list a.client-item img {
     width: 120px;
+  }
+
+  /* Replace background-attachment: fixed with a fixed pseudo-element,
+     which is much more stable on mobile browsers. */
+  body {
+    background-image: none !important;
+    background-attachment: scroll !important;
+  }
+
+  body::before {
+    content: '' !important;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url('assets/hellgate_dark.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (max-width: 480px) {
+  #hgc-nav-logo img {
+    max-width: 92px;
+  }
+
+  #hgc-nav-links {
+    left: 0.75rem;
+    right: 0.75rem;
+  }
+
+  #hgc-nav-cta {
+    padding: 0.38rem 0.72rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
   }
 }
 
@@ -328,7 +578,14 @@ body {
 					<li><a href="#clients">Clients</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
-				<a href="https://blair-gemmer.youcanbook.me/" id="hgc-nav-cta" target="_blank" rel="noopener">Book</a>
+				<div id="hgc-nav-actions">
+					<a href="https://blair-gemmer.youcanbook.me/" id="hgc-nav-cta" target="_blank" rel="noopener">Book</a>
+					<button type="button" id="hgc-nav-toggle" aria-controls="hgc-nav-links" aria-expanded="false" aria-label="Toggle navigation">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
 			</div>
 		</nav>
 
@@ -337,7 +594,7 @@ body {
 				<div class="inner">
 
 					<!-- HERO -->
-					<div id="container05" class="container-component instance-5 style-2 default full">
+					<div id="container05" class="container-component instance-5 style-2 default full screen">
 						<div class="wrapper">
 							<div class="inner" data-onvisible-trigger="1">
 								<h1 id="text07" class="text-component instance-7 style-2">Build. Secure. Scale.</h1>
@@ -406,7 +663,7 @@ body {
 									<p id="text10" class="text-component instance-10 style-1">Production systems and AI workflows, shipped and secured. Reduced incident rates and hardened attack surfaces. Automated workflows that scale.</p>
 									<ul id="buttons04" class="buttons-component instance-4 style-1">
 										<li>
-											<a href="#contact" class="n01" role="button"><span class="label">Start the Conversation</span></a>
+											<a href="#clients" class="n01" role="button"><span class="label">Who we've built for</span></a>
 										</li>
 									</ul>
 								</div>
@@ -452,7 +709,7 @@ body {
 					</div>
 
 					<!-- CONTACT -->
-					<div id="contact" data-scroll-id="contact" data-scroll-behavior="default" data-scroll-offset="0" data-scroll-speed="3" data-scroll-invisible="1" class="container-component instance-4 style-2 default full">
+					<div id="contact" data-scroll-id="contact" data-scroll-behavior="default" data-scroll-offset="0" data-scroll-speed="3" data-scroll-invisible="1" class="container-component instance-4 style-2 default full screen">
 						<div class="wrapper">
 							<div class="inner" data-onvisible-trigger="1">
 								<h2 id="text03" class="text-component instance-3 style-3">Let&#39;s Start a Conversation</h2>
@@ -475,7 +732,40 @@ body {
 		<script src="assets/main.js"></script>
 		<script>
 		document.addEventListener('DOMContentLoaded', function() {
-			document.querySelectorAll('#hgc-nav-links a').forEach(function(a) {
+			var nav = document.getElementById('hgc-nav');
+			var navToggle = document.getElementById('hgc-nav-toggle');
+			var closeNav = function() {
+				if (!nav || !navToggle) return;
+				nav.classList.remove('is-open');
+				navToggle.setAttribute('aria-expanded', 'false');
+			};
+
+			if (nav && navToggle) {
+				navToggle.addEventListener('click', function() {
+					var isOpen = nav.classList.toggle('is-open');
+					navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+				});
+
+				document.addEventListener('click', function(e) {
+					if (nav.classList.contains('is-open') && !nav.contains(e.target)) {
+						closeNav();
+					}
+				});
+
+				document.addEventListener('keydown', function(e) {
+					if (e.key === 'Escape') {
+						closeNav();
+					}
+				});
+
+				window.addEventListener('resize', function() {
+					if (window.innerWidth > 700) {
+						closeNav();
+					}
+				});
+			}
+
+			document.querySelectorAll('#hgc-nav a[href^="#"]').forEach(function(a) {
 				a.addEventListener('click', function(e) {
 					var href = this.getAttribute('href');
 					if (href && href.charAt(0) === '#') {
@@ -486,7 +776,8 @@ body {
 							e.preventDefault();
 							e.stopImmediatePropagation();
 							var top = target.getBoundingClientRect().top + window.scrollY - 64;
-							window.scrollTo({ top: top, behavior: 'smooth' });
+							window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+							closeNav();
 						}
 					}
 				}, true);

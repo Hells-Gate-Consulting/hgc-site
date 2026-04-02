@@ -955,8 +955,8 @@ body.is-instant::after {
 	
 	.site-main > .inner {
 		--padding-horizontal: 3rem;
-		--padding-vertical: 4rem;
-		--spacing: 2rem;
+		--padding-vertical: 0rem;
+		--spacing: 0rem;
 	}
 	
 	.text-component.style-4 {
