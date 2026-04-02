@@ -955,8 +955,8 @@ body.is-instant::after {
 	
 	.site-main > .inner {
 		--padding-horizontal: 3rem;
-		--padding-vertical: 4rem;
-		--spacing: 2rem;
+		--padding-vertical: 0rem;
+		--spacing: 0rem;
 	}
 	
 	.text-component.style-4 {
@@ -1027,9 +1027,14 @@ body.is-instant::after {
 	.container-component.style-2:not(:first-child) {
 		margin-top: 0rem !important;
 	}
-	
+
 	.container-component.style-2:not(:last-child) {
 		margin-bottom: 0rem !important;
+	}
+
+	.container-component.style-2 {
+		min-height: 0 !important;
+		height: auto !important;
 	}
 	
 	.container-component.style-2 > .wrapper > .inner {
@@ -1125,9 +1130,14 @@ body.is-instant::after {
 	.container-component.style-1:not(:first-child) {
 		margin-top: 0rem !important;
 	}
-	
+
 	.container-component.style-1:not(:last-child) {
 		margin-bottom: 0rem !important;
+	}
+
+	.container-component.style-1 {
+		min-height: 0 !important;
+		height: auto !important;
 	}
 	
 	.container-component.style-1 > .wrapper > .inner {
