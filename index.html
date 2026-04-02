@@ -27,9 +27,13 @@ body {
   background-repeat: no-repeat !important;
 }
 
+:root {
+  --hgc-nav-height: 72px;
+}
+
 /* ===== HERO: offset content below fixed nav ===== */
 #container05 {
-  padding-top: 64px;
+  padding-top: var(--hgc-nav-height);
   box-sizing: border-box;
 }
 
@@ -222,7 +226,7 @@ body {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  height: 64px;
+  height: var(--hgc-nav-height);
   background-color: rgba(20, 12, 10, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -240,12 +244,15 @@ body {
   height: 100%;
 }
 #hgc-nav-logo {
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
 }
 #hgc-nav-logo img {
-  height: 36px;
-  width: auto;
   display: block;
+  height: 60px;
+  width: auto;
+  max-width: none;
 }
 #hgc-nav-links {
   display: flex;
@@ -328,7 +335,7 @@ body {
 
 @media (max-width: 1100px) {
   #hgc-nav-links { gap: 1.25rem; }
-  #hgc-nav-logo img { max-width: 150px; }
+  #hgc-nav-logo img { height: 56px; }
 }
 
 @media (max-width: 820px) {
@@ -338,8 +345,7 @@ body {
   }
 
   #hgc-nav-logo img {
-    max-width: 120px;
-    height: auto;
+    height: 56px;
   }
 
   #hgc-nav-links {
@@ -360,6 +366,10 @@ body {
 @media (max-width: 700px) {
   #hgc-nav-inner {
     gap: 0.75rem;
+  }
+
+  #hgc-nav-logo img {
+    height: 56px;
   }
 
   #hgc-nav-links {
@@ -546,7 +556,7 @@ body {
 
 @media (max-width: 480px) {
   #hgc-nav-logo img {
-    max-width: 92px;
+    height: 52px;
   }
 
   #hgc-nav-links {
@@ -568,7 +578,7 @@ body {
 		<nav id="hgc-nav">
 			<div id="hgc-nav-inner">
 				<a href="#top" id="hgc-nav-logo">
-					<img src="assets/hgc_logo_full.png" alt="Hell's Gate Consulting" />
+					<img src="assets/hgc_logo_mark.svg" alt="Hell's Gate Consulting" />
 				</a>
 				<ul id="hgc-nav-links">
 					<li><a href="#top">Home</a></li>
@@ -731,9 +741,12 @@ body {
 		</div>
 		<script src="assets/main.js"></script>
 		<script>
-		document.addEventListener('DOMContentLoaded', function() {
+			document.addEventListener('DOMContentLoaded', function() {
 			var nav = document.getElementById('hgc-nav');
 			var navToggle = document.getElementById('hgc-nav-toggle');
+			var getNavHeight = function() {
+				return nav ? nav.offsetHeight : 72;
+			};
 			var closeNav = function() {
 				if (!nav || !navToggle) return;
 				nav.classList.remove('is-open');
@@ -775,7 +788,7 @@ body {
 						if (target) {
 							e.preventDefault();
 							e.stopImmediatePropagation();
-							var top = target.getBoundingClientRect().top + window.scrollY - 64;
+							var top = target.getBoundingClientRect().top + window.scrollY - getNavHeight();
 							window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
 							closeNav();
 						}
