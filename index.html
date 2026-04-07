@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<meta name="color-scheme" content="light only" />
 		<meta name="description" content="Hell's Gate Consulting - Build. Secure. Scale." />
-		<link rel="icon" href="assets/hgc_logo_mark.svg" type="image/svg+xml" sizes="any" />
+		<link rel="icon" href="assets/hgc_logo_mark.png" type="image/png" sizes="any" />
 		<link rel="icon" href="assets/favicon.png" type="image/png" />
 		<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 		<link href="https://fonts.googleapis.com/css2?display=swap&family=Inter:ital,wght@0,300;0,400;1,300;1,400&family=Dela+Gothic+One:ital,wght@0,400;1,400" rel="stylesheet" type="text/css" />
@@ -259,7 +259,7 @@ body {
 }
 #hgc-nav-links {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex: 1 1 auto;
   list-style: none;
   margin: 0; padding: 0;
@@ -574,6 +574,20 @@ body {
   }
 }
 
+	
+@media (min-width: 901px) {
+  #services, #process, #work, #clients {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+  #services > .wrapper > .inner > div.full,
+  #process > .wrapper > .inner > div.full,
+  #work > .wrapper > .inner > div.full,
+  #clients > .wrapper > .inner > div.full {
+    min-height: 55vh !important;
+  }
+}
+
 		</style>
 	</head>
 	<body id="top" class="is-loading">
@@ -581,7 +595,7 @@ body {
 		<nav id="hgc-nav">
 			<div id="hgc-nav-inner">
 				<a href="#top" id="hgc-nav-logo">
-					<img src="assets/hgc_logo_mark.svg" alt="Hell's Gate Consulting" />
+					<img src="assets/hgc_logo_mark.png" alt="Hell's Gate Consulting" />
 				</a>
 				<ul id="hgc-nav-links">
 					<li><a href="#top">Home</a></li>
